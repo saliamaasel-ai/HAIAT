@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FAFAFB;
+  --surface: #FFFFFF;
+  --surface-2: #F3F4F7;
+  --text: #12151C;
+  --text-dim: #5B6270;
+  --border: #E7E8EC;
+}
+
+.dark {
+  --bg: #0A0D14;
+  --surface: #12151F;
+  --surface-2: #171B27;
+  --text: #F3F5F9;
+  --text-dim: #9199AA;
+  --border: #232838;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background .35s ease, color .35s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: #FFC93C;
+  color: #12151C;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+@layer components {
+  .surface {
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+  .surface-2 {
+    background-color: var(--surface-2);
+  }
+  .text-dim {
+    color: var(--text-dim);
+  }
+  .border-base {
+    border-color: var(--border);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl font-bold text-sm transition-transform active:scale-95 whitespace-nowrap;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white shadow-[0_8px_20px_-8px_rgba(21,84,214,0.6)] hover:bg-brand-700;
+  }
+  .btn-accent {
+    @apply btn bg-accent-500 text-[#1B1400] shadow-[0_8px_20px_-8px_rgba(245,179,1,0.55)] hover:bg-accent-400;
+  }
+  .btn-ghost {
+    @apply btn border hover:opacity-80;
+    background-color: var(--surface-2);
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-sm {
+    @apply px-3.5 py-2 text-xs rounded-xl;
+  }
+  .btn-block {
+    @apply w-full;
+  }
+
+  .card {
+    border-radius: 20px;
+    border-width: 1px;
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl text-sm outline-none transition;
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .input:focus {
+    border-color: #2C6BEF;
+    box-shadow: 0 0 0 4px var(--brand-focus, #E7EFFE);
+  }
+
+  .eyebrow {
+    @apply inline-block text-xs font-extrabold tracking-widest uppercase px-3 py-1.5 rounded-full mb-4;
+    color: #1554D6;
+    background-color: #E7EFFE;
+  }
+  .dark .eyebrow {
+    background-color: #132444;
+  }
+
+  .tag {
+    @apply text-[11px] font-extrabold px-2 py-1 rounded-lg;
+  }
+  .tag-new { @apply bg-brand-600 text-white; }
+  .tag-sale { @apply bg-accent-500 text-[#1B1400]; }
+}
+
+@layer utilities {
+  .page-enter {
+    animation: fadein .4s ease;
+  }
+}
