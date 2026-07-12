@@ -52,7 +52,14 @@ export const PRODUCTS = [
 
   // ---- Құлаққаптар ----
   { id: 16, cat: 'headphones', name: 'TWS Bluetooth құлаққап Pro', price: 13900, old: 18900, desc: 'Белсенді шуды басу (ANC) функциясы бар сымсыз құлаққап.', isNew: true, rating: 4.8,
-    reviews: [
+    images: [
+  "/images/photo_2026-07-11_14-28-59.jpg",
+  "/images/photo_2026-07-11_14-29-10.jpg",
+  "/images/photo_2026-07-11_14-29-14.jpg",
+  "/images/photo_2026-07-11_14-29-19.jpg",
+  "/images/photo_2026-07-11_14-29-23.jpg"
+],
+   reviews: [
       { name: 'Айдана', rating: 5, text: 'Дыбысы керемет, батареясы ұзақ жұмыс істейді.', date: '2026-06-10' },
       { name: 'Санжар', rating: 4, text: 'Құлаққа жайлы, бірақ қорап сапасы орташа.', date: '2026-05-02' },
     ] },
