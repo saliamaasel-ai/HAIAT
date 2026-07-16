@@ -52,7 +52,7 @@ export const PRODUCTS = [
 
   // ---- Құлаққаптар ----
   { id: 16, cat: 'headphones', name: 'TWS Bluetooth құлаққап Pro', price: 13900, old: 18900, desc: 'Белсенді шуды басу (ANC) функциясы бар сымсыз құлаққап.', isNew: true, rating: 4.8,
-    images: [
+    images: [ 
   "/images/photo_2026-07-11_14-28-59.jpg",
   "/images/photo_2026-07-11_14-29-10.jpg",
   "/images/photo_2026-07-11_14-29-14.jpg",
