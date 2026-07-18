@@ -71,7 +71,11 @@ export default function ProductPage({ productId }) {
 
       <div className="grid md:grid-cols-2 gap-12">
         <div className="aspect-square rounded-[28px] flex items-center justify-center bg-gradient-to-br from-brand-100 to-accent-100 md:sticky md:top-[96px] h-fit">
-          <CategoryIcon category={product.cat} className="w-[40%] h-[40%] text-brand-600" />
+          <img
+  src={product.images?.[0] || "/placeholder.png"}
+  alt={product.name}
+  className="w-full h-full object-contain p-4"
+/>
         </div>
 
         <div>
