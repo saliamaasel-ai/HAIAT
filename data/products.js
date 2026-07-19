@@ -17,8 +17,28 @@ export const CAT_LABELS = CATEGORIES.reduce((acc, c) => {
 
 export const PRODUCTS = [
   // ---- Телефон қаптары ----
-  { id: 1, cat: 'cases', name: 'Силикон қап MagSafe iPhone 15', price: 6900, old: 9900, desc: 'Магнитті бекітілген жұмсақ силикон қап, соққыдан қорғайды.', isNew: true, rating: 4.7,
-    reviews: [
+   {
+  id: 1,
+  cat: 'cases',
+  name: 'Силикон қап MagSafe iPhone 15',
+  price: 6900,
+  old: 9900,
+  desc: 'Магнитті бекітілген жұмсақ силикон қап, соққыдан қорғайды.',
+  isNew: true,
+  rating: 4.7,
+  reviews: [
+    { name: 'Асем', rating: 5, text: 'Өте сапалы, магниті мықты ұстайды.', date: '2026-05-12' },
+    { name: 'Ерлан', rating: 4, text: 'Түсі әдемі, бірақ жеңіл сызылады.', date: '2026-04-02' }
+  ],
+  images: [
+    "/images/photo_2026-07-11_14-28-59.jpg",
+    "/images/photo_2026-07-11_14-29-10.jpg",
+    "/images/photo_2026-07-11_14-29-14.jpg",
+    "/images/photo_2026-07-11_14-29-19.jpg",
+    "/images/photo_2026-07-11_14-29-23.jpg"
+  ]
+},
+      
       { name: 'Асем', rating: 5, text: 'Өте сапалы, магниті мықты ұстайды.', date: '2026-05-12' },
       { name: 'Ерлан', rating: 4, text: 'Түсі әдемі, бірақ жеңіл сызылады.', date: '2026-04-02' },
     ] },
