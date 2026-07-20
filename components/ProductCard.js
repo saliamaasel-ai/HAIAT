@@ -40,11 +40,15 @@ export default function ProductCard({ product }) {
           </svg>
         </button>
         <Link href={`/product/${product.id}`} className="w-full h-full flex items-center justify-center">
-          <img
-  src={product.images?.[0] || "/placeholder.png"}
-  alt={product.name}
-  className="w-full h-full object-contain p-4"
-/>
+          {product.images?.[0] ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-contain p-4"
+            />
+          ) : (
+            <CategoryIcon category={product.cat} className="w-[46%] h-[46%] text-brand-600" />
+          )}
         </Link>
       </div>
       <div className="p-4 flex flex-col gap-2 flex-1">

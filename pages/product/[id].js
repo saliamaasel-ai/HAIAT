@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Seo from '@/components/Seo';
@@ -30,6 +30,9 @@ export default function ProductPage({ productId }) {
   const [revName, setRevName] = useState('');
   const [revText, setRevText] = useState('');
   const [revStars, setRevStars] = useState(5);
+  const [activeImg, setActiveImg] = useState(0);
+
+  useEffect(() => { setActiveImg(0); }, [productId]);
 
   const product = getProductById(productId);
   if (!product) return null;
@@ -37,6 +40,7 @@ export default function ProductPage({ productId }) {
   const discount = product.old ? Math.round((1 - product.price / product.old) * 100) : 0;
   const related = PRODUCTS.filter((x) => x.cat === product.cat && x.id !== product.id).slice(0, 4);
   const isWished = wishlist.includes(product.id);
+  const gallery = product.images || [];
 
   function submitReview(e) {
     e.preventDefault();
@@ -70,12 +74,35 @@ export default function ProductPage({ productId }) {
       ]} />
 
       <div className="grid md:grid-cols-2 gap-12">
-        <div className="aspect-square rounded-[28px] flex items-center justify-center bg-gradient-to-br from-brand-100 to-accent-100 md:sticky md:top-[96px] h-fit">
-          <img
-  src={product.images?.[0] || "/placeholder.png"}
-  alt={product.name}
-  className="w-full h-full object-contain p-4"
-/>
+        <div className="md:sticky md:top-[96px] h-fit">
+          <div className="aspect-square rounded-[28px] flex items-center justify-center bg-gradient-to-br from-brand-100 to-accent-100 overflow-hidden">
+            {gallery.length ? (
+              <img
+                src={gallery[activeImg] || gallery[0]}
+                alt={product.name}
+                className="w-full h-full object-contain p-4"
+              />
+            ) : (
+              <CategoryIcon category={product.cat} className="w-[40%] h-[40%] text-brand-600" />
+            )}
+          </div>
+          {gallery.length > 1 && (
+            <div className="flex gap-2.5 mt-3.5 overflow-x-auto pb-1">
+              {gallery.map((src, i) => (
+                <button
+                  key={src}
+                  onClick={() => setActiveImg(i)}
+                  className={`w-16 h-16 shrink-0 rounded-xl overflow-hidden border-2 transition ${
+                    i === activeImg ? 'border-brand-600' : 'border-transparent'
+                  }`}
+                  style={i !== activeImg ? { borderColor: 'var(--border)' } : {}}
+                  aria-label={`${i + 1}-сурет`}
+                >
+                  <img src={src} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div>
