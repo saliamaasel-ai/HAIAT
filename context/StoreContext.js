@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
-import { PRODUCTS, DELIVERY_FEE, DELIVERY_FREE_FROM } from '@/data/products';
+import { DELIVERY_FEE, DELIVERY_FREE_FROM } from '@/data/products';
+import { fetchProducts } from '@/lib/products';
 
 const StoreContext = createContext(null);
 
@@ -13,6 +14,8 @@ function safeParse(json, fallback) {
 }
 
 export function StoreProvider({ children }) {
+  const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const [cart, setCart] = useState({});
   const [wishlist, setWishlist] = useState([]);
   const [theme, setTheme] = useState('light');
@@ -20,7 +23,13 @@ export function StoreProvider({ children }) {
   const [toast, setToast] = useState(null);
   const [hydrated, setHydrated] = useState(false);
 
-  // Load persisted state on first mount (client only)
+  useEffect(() => {
+    fetchProducts().then((data) => {
+      setProducts(data);
+      setProductsLoading(false);
+    });
+  }, []);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     setCart(safeParse(localStorage.getItem('nur_cart'), {}));
@@ -64,9 +73,9 @@ export function StoreProvider({ children }) {
 
   const addToCart = useCallback((id, qty = 1) => {
     setCart((prev) => ({ ...prev, [id]: (prev[id] || 0) + qty }));
-    const p = PRODUCTS.find((x) => x.id === id);
+    const p = products.find((x) => x.id === id);
     showToast(`✅ "${p?.name}" себетке қосылды`);
-  }, [showToast]);
+  }, [showToast, products]);
 
   const setQty = useCallback((id, qty) => {
     setCart((prev) => {
@@ -98,10 +107,10 @@ export function StoreProvider({ children }) {
   const cartCount = useMemo(() => Object.values(cart).reduce((a, b) => a + b, 0), [cart]);
   const cartSubtotal = useMemo(
     () => Object.entries(cart).reduce((s, [id, q]) => {
-      const p = PRODUCTS.find((x) => x.id === Number(id));
+      const p = products.find((x) => x.id === Number(id));
       return s + (p ? p.price * q : 0);
     }, 0),
-    [cart]
+    [cart, products]
   );
   const deliveryFee = useMemo(() => {
     if (cartSubtotal === 0) return 0;
@@ -110,13 +119,14 @@ export function StoreProvider({ children }) {
   const cartTotal = cartSubtotal + deliveryFee;
 
   const addReview = useCallback((productId, review) => {
-    const p = PRODUCTS.find((x) => x.id === productId);
+    const p = products.find((x) => x.id === productId);
     if (!p) return;
     p.reviews.unshift(review);
     p.rating = Math.round((p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length) * 10) / 10;
-  }, []);
+  }, [products]);
 
   const value = {
+    products, productsLoading,
     cart, setQty, addToCart, removeFromCart, clearCart, cartCount, cartSubtotal, deliveryFee, cartTotal,
     wishlist, toggleWishlist,
     theme, toggleTheme,
