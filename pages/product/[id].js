@@ -1,30 +1,17 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Seo from '@/components/Seo';
 import CategoryIcon from '@/components/CategoryIcon';
 import ProductCard from '@/components/ProductCard';
 import { StarRating, StarPicker } from '@/components/StarRating';
 import { Breadcrumb } from '../catalog';
-import { PRODUCTS, CAT_LABELS, money, getProductById } from '@/data/products';
+import { CAT_LABELS, money } from '@/data/products';
 import { useStore } from '@/context/StoreContext';
 
-export async function getStaticPaths() {
-  return {
-    paths: PRODUCTS.map((p) => ({ params: { id: String(p.id) } })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const product = getProductById(params.id);
-  if (!product) return { notFound: true };
-  return { props: { productId: product.id } };
-}
-
-export default function ProductPage({ productId }) {
+export default function ProductPage() {
   const router = useRouter();
-  const { wishlist, toggleWishlist, addToCart, addReview, showToast } = useStore();
+  const { id } = router.query;
+  const { products, productsLoading, wishlist, toggleWishlist, addToCart, addReview, showToast } = useStore();
   const [, forceUpdate] = useState(0);
   const [qty, setQty] = useState(1);
   const [revName, setRevName] = useState('');
@@ -32,13 +19,15 @@ export default function ProductPage({ productId }) {
   const [revStars, setRevStars] = useState(5);
   const [activeImg, setActiveImg] = useState(0);
 
-  useEffect(() => { setActiveImg(0); }, [productId]);
+  useEffect(() => { setActiveImg(0); }, [id]);
 
-  const product = getProductById(productId);
+  if (productsLoading) return null;
+
+  const product = products.find((p) => String(p.id) === String(id));
   if (!product) return null;
 
   const discount = product.old ? Math.round((1 - product.price / product.old) * 100) : 0;
-  const related = PRODUCTS.filter((x) => x.cat === product.cat && x.id !== product.id).slice(0, 4);
+  const related = products.filter((x) => x.cat === product.cat && x.id !== product.id).slice(0, 4);
   const isWished = wishlist.includes(product.id);
   const gallery = product.images || [];
 
@@ -117,9 +106,7 @@ export default function ProductPage({ productId }) {
             <span className="text-[30px] font-extrabold font-display">{money(product.price)}</span>
             {product.old && <span className="text-dim line-through text-[15px]">{money(product.old)}</span>}
           </div>
-          <p className="text-dim text-[14.5px] mb-5 leading-[1.7]">
-            {product.desc} Бұл өнім жоғары сапалы материалдардан жасалған, күнделікті қолдануға арналған және сатып алушылар тарапынан жоғары бағаланған.
-          </p>
+          <p className="text-dim text-[14.5px] mb-5 leading-[1.7]">{product.desc}</p>
 
           <div className="flex items-center gap-3.5 my-5">
             <span className="font-bold text-[13.5px]">Саны:</span>
@@ -153,7 +140,6 @@ export default function ProductPage({ productId }) {
         </div>
       </div>
 
-      {/* REVIEWS */}
       <div className="mt-14">
         <h3 className="font-extrabold text-xl mb-5">Пікірлер</h3>
         <div className="flex items-center gap-5 flex-wrap mb-6">
