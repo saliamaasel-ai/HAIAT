@@ -3,10 +3,12 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Seo from '@/components/Seo';
 import ProductCard from '@/components/ProductCard';
-import { PRODUCTS, CATEGORIES } from '@/data/products';
+import { CATEGORIES } from '@/data/products';
+import { useStore } from '@/context/StoreContext';
 
 export default function Catalog() {
   const router = useRouter();
+  const { products, productsLoading } = useStore();
   const [q, setQ] = useState('');
   const [cats, setCats] = useState(new Set());
   const [min, setMin] = useState('');
@@ -14,7 +16,6 @@ export default function Catalog() {
   const [sort, setSort] = useState('default');
   const [ready, setReady] = useState(false);
 
-  // Sync from URL query params (?q=, ?cat=)
   useEffect(() => {
     if (!router.isReady) return;
     const { q: qq, cat } = router.query;
@@ -24,7 +25,7 @@ export default function Catalog() {
   }, [router.isReady, router.query]);
 
   const list = useMemo(() => {
-    let items = PRODUCTS.slice();
+    let items = products.slice();
     if (q) items = items.filter((p) => p.name.toLowerCase().includes(q.toLowerCase()) || p.desc.toLowerCase().includes(q.toLowerCase()));
     if (cats.size) items = items.filter((p) => cats.has(p.cat));
     if (min !== '') items = items.filter((p) => p.price >= Number(min));
@@ -34,7 +35,7 @@ export default function Catalog() {
     else if (sort === 'new') items = items.filter((p) => p.isNew);
     else if (sort === 'sale') items = items.filter((p) => p.old).sort((a, b) => (1 - b.price / b.old) - (1 - a.price / a.old));
     return items;
-  }, [q, cats, min, max, sort]);
+  }, [q, cats, min, max, sort, products]);
 
   function toggleCat(slug) {
     setCats((prev) => {
@@ -48,7 +49,7 @@ export default function Catalog() {
     setQ(''); setCats(new Set()); setMin(''); setMax(''); setSort('default');
   }
 
-  if (!ready) return null;
+  if (!ready || productsLoading) return null;
 
   return (
     <div className="page-enter max-w-[1280px] mx-auto px-6 py-10">
