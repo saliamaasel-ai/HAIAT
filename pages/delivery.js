@@ -17,14 +17,14 @@ export default function Delivery() {
         <Step n="1" title="Тапсырыс беру" desc="Сайттан тауарды таңдап, себетке қосыңыз." />
         <Step n="2" title="Растау" desc="Менеджер қоңырау шалып тапсырысты растайды." />
         <Step n="3" title="Жіберу" desc="Тауар курьер немесе пошта арқылы жіберіледі." />
-        <Step n="4" title="Жеткізу" desc="1-5 күн ішінде мекенжайыңызға жеткіземіз." />
+        <Step n="4" title="Жеткізу" desc="1-2 күн ішінде мекенжайыңызға жеткіземіз." />
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-        <FeatureRow emoji="🚗" title="Атырау қаласы" desc={`1-2 жұмыс күні, ${money(DELIVERY_FEE)} немесе ${money(DELIVERY_FREE_FROM)}+ тегін`} />
+        <FeatureRow emoji="🚗" title="Қала ішіне жеткізу" desc={`, тегін`} />
         <FeatureRow emoji="📦" title="Қазақстан бойынша" desc="3-5 жұмыс күні, Казпошта/CDEK арқылы" />
         <FeatureRow emoji="🏪" title="Дүкеннен алу" desc="Атырау қ., Шүкір Еркінова 75 мекенжайынан тегін" />
-        <FeatureRow emoji="↩️" title="Қайтару" desc="30 күн ішінде тегін қайтару кепілдігі" />
+        <FeatureRow emoji="↩️" title="Қайтару" desc="Лезде тегін қайтару кепілдігі" />
       </div>
 
       <h4 className="font-bold mb-4">Төлем тәсілдері</h4>
