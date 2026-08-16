@@ -16,9 +16,9 @@ export default function Promotions() {
       </div>
 
       <div className="grid sm:grid-cols-3 gap-5 mb-12">
-        <PromoCard pct="-30%" title="Құлаққаптарға" desc="TWS және спорт құлаққаптарына жеңілдік." />
-        <PromoCard pct="-25%" title="Зарядтау құрылғыларына" desc="Power Bank, зарядтағыштар мен кабельдер." />
-        <PromoCard pct="-20%" title="Қаптар мен әйнектерге" desc="Барлық үлгідегі қорғаныш аксессуарлар." />
+        <PromoCard pct="-20%" title="Жазылушыларға" desc="Барлық тауарға." />
+        <PromoCard pct="-20%" title="Жазылушыларға" desc="Барлық тауарға." />
+        <PromoCard pct="-20%" title="Жазылушыларға" desc="Барлық тауарға." />
       </div>
 
       <div className="mb-9">
