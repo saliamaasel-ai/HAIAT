@@ -34,8 +34,8 @@ export default function Header() {
       >
         <div className="max-w-[1280px] mx-auto px-6 h-full flex items-center gap-5">
           <Link href="/" className="flex items-center gap-2.5 font-display font-extrabold text-xl shrink-0">
-            <span className="w-[34px] h-[34px] rounded-[10px] bg-gradient-to-br from-brand-600 to-accent-500 flex items-center justify-center text-white text-base font-extrabold">N</span>
-            NUR<span className="text-accent-500">.kz</span>
+            <span className="w-[34px] h-[34px] rounded-[10px] bg-gradient-to-br from-brand-600 to-accent-500 flex items-center justify-center text-white text-base font-extrabold">H</span>
+            HAIAT<span className="text-accent-500">.kz</span>
           </Link>
 
           <nav className="hidden lg:flex gap-1 flex-1">
