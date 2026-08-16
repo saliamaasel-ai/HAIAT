@@ -21,9 +21,9 @@ export default function Delivery() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-        <FeatureRow emoji="🚗" title="Алматы қаласы" desc={`1-2 жұмыс күні, ${money(DELIVERY_FEE)} немесе ${money(DELIVERY_FREE_FROM)}+ тегін`} />
+        <FeatureRow emoji="🚗" title="Атырау қаласы" desc={`1-2 жұмыс күні, ${money(DELIVERY_FEE)} немесе ${money(DELIVERY_FREE_FROM)}+ тегін`} />
         <FeatureRow emoji="📦" title="Қазақстан бойынша" desc="3-5 жұмыс күні, Казпошта/CDEK арқылы" />
-        <FeatureRow emoji="🏪" title="Дүкеннен алу" desc="Алматы қ., Абай даңғылы 10 мекенжайынан тегін" />
+        <FeatureRow emoji="🏪" title="Дүкеннен алу" desc="Атырау қ., Шүкір Еркінова 75 мекенжайынан тегін" />
         <FeatureRow emoji="↩️" title="Қайтару" desc="30 күн ішінде тегін қайтару кепілдігі" />
       </div>
 
