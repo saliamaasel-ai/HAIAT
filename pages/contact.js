@@ -25,7 +25,7 @@ export default function Contact() {
       <div className="grid md:grid-cols-2 gap-10">
         <div>
           <InfoRow icon={<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2z" />} title="Телефон" value="+7 7023876843" />
-          <InfoRow icon={<><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 6-10 7L2 6" /></>} title="Email" value="info@nur.kz" />
+          <InfoRow icon={<><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 6-10 7L2 6" /></>} title="Email" value="info" />Kazbekovzhandos@gmail.com
           <InfoRow icon={<><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></>} title="Мекенжай" value="Атырау қ., Шүкір Еркінова 75" />
           <InfoRow icon={<><path d="M12 8v4l3 3" /><circle cx="12" cy="12" r="9" /></>} title="Жұмыс уақыты" value="Дүйсенбі–Жексенбі, 09:00–20:00" last />
           <div className="aspect-[16/10] rounded-2xl mt-4 flex items-center justify-center text-dim border" style={{ background: 'var(--surface-2)', borderColor: 'var(--border)' }}>
