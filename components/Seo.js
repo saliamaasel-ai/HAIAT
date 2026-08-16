@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const SITE_NAME = 'NUR.kz';
+const SITE_NAME = 'HAIAT.kz';
 const SITE_URL = 'https://nur-kz-store.vercel.app';
 
 export default function Seo({
